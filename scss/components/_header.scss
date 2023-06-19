@@ -38,6 +38,10 @@
         border-radius: 0.3rem;
         width: 100%;
         font-size: 1.5rem;
+
+        &[type=text]:focus {
+            border: 3px solid #FED56D;
+        }
     }
     
 }

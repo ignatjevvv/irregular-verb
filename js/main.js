@@ -1633,28 +1633,61 @@ sizeText.addEventListener('touchmove', function () {
 // ******************* SHOW WORDS LIST ON WEB PAGE *************************
 const table = document.querySelector('tbody');
 
-// table.innerHTML = '';
 
-wordList.forEach(item => {
-    table.innerHTML += `
-    <tr>
-      <td><a src="audio/${item.v1}.mp3" class="play"></a></td>
-      <td>${item.v1}</td>
-      <td>${item.v2}</td>
-      <td>${item.v3}</td>
-      <td>${item.translate.split(0, 5)}</td>
-    </tr>
-    <tr class="hide">
-        <td>${item.v4}</td>
-        <td>${item.v5}</td>
-        <td>${item.v6}</td>
-    </tr>
-  `;
+function printWordList() {
+    wordList.forEach(item => {
+        table.innerHTML += `
+        <tr>
+          <td><a src="audio/${item.v1}.mp3" class="play"></a></td>
+          <td>${item.v1}</td>
+          <td>${item.v2}</td>
+          <td>${item.v3}</td>
+          <td>${item.translate.split(0, 5)}</td>
+        </tr>
+        <tr class="hide">
+            <td>${item.v4}</td>
+            <td>${item.v5}</td>
+            <td>${item.v6}</td>
+        </tr>
+      `;
+    });
+}
+
+printWordList();
+
+
+// ******************* SEARCH WORD *************************
+const inputSearchWord = document.getElementById('word');
+
+
+// const regex = new RegExp('been');
+
+inputSearchWord.addEventListener('keyup', () => {
+    const regex = new RegExp(inputSearchWord.value.toLowerCase());
+    table.innerHTML = '';
+    wordList.forEach(word => {
+        let arr = [word.v1, word.v2, word.v3];
+        if (regex.test(arr.join())) {
+            table.innerHTML += `
+            <tr>
+              <td><a src="audio/${word.v1}.mp3" class="play"></a></td>
+              <td>${word.v1}</td>
+              <td>${word.v2}</td>
+              <td>${word.v3}</td>
+              <td>${word.translate.split(0, 5)}</td>
+            </tr>
+          `;
+        }
+    });
+
+    audio();
 });
 
 
 // ******************* PLAY AUDIO EXAMPLE *************************
-const audioLink = document.querySelectorAll('a');
+function audio() {
+
+    const audioLink = document.querySelectorAll('a');
 const audio = new Audio();
 
 audio.addEventListener('loadedmetadata', e => {
@@ -1706,6 +1739,11 @@ function play(src, item) {
         });
     }
 }
+
+
+}
+
+audio();
 
 
 

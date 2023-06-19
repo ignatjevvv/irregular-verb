@@ -1,0 +1,37 @@
+@media screen and (max-width: 420px) {
+    body {
+        font-size: .8rem;
+    }
+
+    .nav {
+        display: flex;
+        // grid-template-columns: repeat(2, 1fr);
+        justify-content: space-between;
+
+        .wrapper {
+            display: none;
+        }
+
+        &__input {
+            width: 280px;
+            font-size: 1rem;
+        }
+    }
+
+    table {
+        width: 340px;
+        border-spacing: .1rem;
+        border-collapse: separate;
+    }
+
+    td, th {
+        padding: 1rem 0;
+        font-size: .9rem;
+        text-align: center;
+    }
+
+    .words {
+        padding: inherit;
+        font-size: 14px;
+    }
+}
