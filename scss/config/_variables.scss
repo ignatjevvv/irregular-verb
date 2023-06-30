@@ -18,6 +18,7 @@
 
 :root {
     --header-height: 3.5rem;
+    --header-color: var(--body-color);
 
     /*========== Colors ==========*/
     --text-color: hsl(240, 11%, 96%);
@@ -26,4 +27,13 @@
     /*========== Font and typography ==========*/
     /*.5rem = 8px | 1rem = 16px ...*/
     --body-font: 'SF-Pro-Display', sans-serif;
+    --focus-color-table: #f5f5f74f; 
+}
+
+/*========== Variables Dark theme ==========*/
+body.light-theme {
+    --header-color: var(--body-color);
+    --body-color: hsl(0, 0%, 93%);
+    --text-color: hsl(0, 0%, 5%);
+    --focus-color-table: #3c3c3c4f; 
 }

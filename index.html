@@ -6,41 +6,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <link rel="stylesheet" href="css/styles.css">
-    <title>Document</title>
+    <title>Irregular Verb</title>
 </head>
 
 <body>
-    
+    <!--====================== HEADER ======================-->
     <header class="header" id="header">
         <nav class="nav container">
-            <div class="wrapper">
-                <span class="small">A</span>
+
+            <a href="#" class="nav__logo">
+                <img src="/img/logo_.png" alt="" class="nav__logo-img">
+            </a>
+
+
+
+            <div class="nav__searchbox">
+                <div class="nav__searchicon">
+                    <i class='bx bx-search'></i>
+                </div>
+
+                <div class="nav__search">
+                    <input type="text" name="word" id="word" value="" placeholder="Поиск глагола" class="nav__input" >
+                </div>
+            </div>
+
+
+            <!-- <div class="nav__range-wrapper">
+                <span class="nav__small-letter">A</span>
                 
-                <div class="range">
+                <div class="nav__sizerange">
                     <input type="range" name="size" id="size" value="0" class="nav__range">
                 </div>
         
-                <span class="large">A</span>
-            </div>
+                <span class="nav__large-letter">A</span>
+            </div> -->
 
-            <div class="nav__search">
-                <input type="text" name="word" id="word" value="" placeholder="Поиск глагола" class="nav__input" >
+            <div class="nav__settings">
+                <!-- <div class="nav__btn">
+                    <button class="nav__transcription" id="nav-transcription">
+                        <i class="uil uil-english-to-chinese"></i>
+                    </button>
+                </div> -->
+    
+                <div class="nav__theme">
+                    <i class='bx bx-sun' id="theme-button"></i>
+                </div>
             </div>
-
-            <div class="nav__btn">
-                <button class="nav__transcription" id="nav-transription">
-                    <i class="uil uil-english-to-chinese"></i>
-                </button>
-            </div>
+        
         </nav>
     </header>
 
 
     <main>
         <section class="words" id="words">
-            <div class="table container">
-                <table>
+            <div class="words__content container">
+                <table class="words__table">
                     <tr>
                         <!-- <td></td>
                         <td>V<i>1</i><br> I форма глагола</td>

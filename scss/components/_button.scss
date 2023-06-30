@@ -10,7 +10,7 @@ i {
     width: 0;
     height: 10px;
   
-    border-color: transparent transparent transparent #ffffff;
+    border-color: transparent transparent transparent var(--text-color);
     transition: 100ms all ease;
     cursor: pointer;
   
@@ -19,7 +19,6 @@ i {
 
     margin: 0 auto;
 }
-
   
 .paused {
     display: flex;
@@ -29,7 +28,7 @@ i {
     width: 0;
     height: 1rem;
   
-    border-color: transparent transparent transparent #ffffff;
+    border-color: transparent transparent transparent var(--text-color);
     transition: 100ms all ease;
     cursor: pointer;
 

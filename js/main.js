@@ -1604,30 +1604,30 @@ let wordList = [
 
 
 // ******************* RESIZE FONT TABLE RANGE *************************
-const sizeText = document.querySelector("#size"), 
-      tableWord = document.querySelector('table');
+const sizeText = document.querySelector("#size"),
+    tableWord = document.querySelector('table');
 
-sizeText.onmousemove = function (e) {
-    // if (this.value.slice(0, 1) >= 9) { return this.value = 9 };
-    // let sizeFont = +this.value > 99 ? 10 + '.' + this.value.slice(-1) : +this.value.slice(0, 1) + '.' + this.value.slice(-1);
-    let sizeFont;
-    let sizeX = 3;
+// sizeText.onmousemove = function (e) {
+//     // if (this.value.slice(0, 1) >= 9) { return this.value = 9 };
+//     // let sizeFont = +this.value > 99 ? 10 + '.' + this.value.slice(-1) : +this.value.slice(0, 1) + '.' + this.value.slice(-1);
+//     let sizeFont;
+//     let sizeX = 3;
 
-    if (+this.value > 99 ) {
-        sizeFont = (10 + '.' + this.value.slice(-1)) * sizeX;
-    } else if (this.value < 10) {
-        sizeFont = (0 + '.' + this.value.slice(-1)) * sizeX;
-    } else {
-        sizeFont = (+this.value.slice(0, 1) + '.' + this.value.slice(-1)) * sizeX;
-    }
+//     if (+this.value > 99) {
+//         sizeFont = (10 + '.' + this.value.slice(-1)) * sizeX;
+//     } else if (this.value < 10) {
+//         sizeFont = (0 + '.' + this.value.slice(-1)) * sizeX;
+//     } else {
+//         sizeFont = (+this.value.slice(0, 1) + '.' + this.value.slice(-1)) * sizeX;
+//     }
 
-    table.style = `font-size: ${24 + +sizeFont}px`;
-    console.log(sizeFont);
-};
+//     table.style = `font-size: ${24 + +sizeFont}px`;
+//     console.log(sizeFont);
+// };
 
-sizeText.addEventListener('touchmove', function () {
-    document.body.style = `font-size: ${24 + +this.value}px`;
-});
+// sizeText.addEventListener('touchmove', function () {
+//     document.body.style = `font-size: ${24 + +this.value}px`;
+// });
 
 
 // ******************* SHOW WORDS LIST ON WEB PAGE *************************
@@ -1645,6 +1645,7 @@ function printWordList() {
           <td>${item.translate.split(0, 5)}</td>
         </tr>
         <tr class="hide">
+            <td></td>
             <td>${item.v4}</td>
             <td>${item.v5}</td>
             <td>${item.v6}</td>
@@ -1670,75 +1671,82 @@ inputSearchWord.addEventListener('keyup', () => {
         if (regex.test(arr.join())) {
             table.innerHTML += `
             <tr>
-              <td><a src="audio/${word.v1}.mp3" class="play"></a></td>
-              <td>${word.v1}</td>
-              <td>${word.v2}</td>
-              <td>${word.v3}</td>
-              <td>${word.translate.split(0, 5)}</td>
+                <td><a src="audio/${word.v1}.mp3" class="play"></a></td>
+                <td>${word.v1}</td>
+                <td>${word.v2}</td>
+                <td>${word.v3}</td>
+                <td>${word.translate.split(0, 5)}</td>
+            </tr>
+            <tr class="hide show">
+                <td></td>
+                <td>${word.v4}</td>
+                <td>${word.v5}</td>
+                <td>${word.v6}</td>
             </tr>
           `;
         }
     });
 
     audio();
+    showTrans();
 });
 
 
 // ******************* PLAY AUDIO EXAMPLE *************************
 function audio() {
 
-    const audioLink = document.querySelectorAll('a');
-const audio = new Audio();
+    const audioLink = document.querySelectorAll('.play');
+    const audio = new Audio();
 
-audio.addEventListener('loadedmetadata', e => {
-    let ms = audio.duration;
-});
-
-let totalLinkPlay;
-
-audioLink.forEach(item => {
-    item.addEventListener('click', e => {
-        play(item.attributes[0].nodeValue, item);
-        totalLinkPlay = item.attributes[0].nodeValue;
+    audio.addEventListener('loadedmetadata', e => {
+        let ms = audio.duration;
     });
-});
 
-function play(src, item) {
+    let totalLinkPlay;
 
-    if (totalLinkPlay === src) {
-        if (audio.paused) {
-            item.classList.add('paused');
+    audioLink.forEach(item => {
+        item.addEventListener('click', e => {
+            play(item.attributes[0].nodeValue, item);
+            totalLinkPlay = item.attributes[0].nodeValue;
+        });
+    });
+
+    function play(src, item) {
+
+        if (totalLinkPlay === src) {
+            if (audio.paused) {
+                item.classList.add('paused');
+
+                tableWord.classList.add('focus');
+                item.parentNode.parentNode.classList.add('active');
+                audio.play();
+            } else {
+                tableWord.classList.remove('focus');
+                item.classList.remove('paused');
+                audio.pause();
+            }
+
+        } else {
+
+            audioLink.forEach(item => {
+                item.classList.remove('paused');
+                item.parentNode.parentNode.classList.remove('active');
+            });
+
+            audio.src = src;
+            audio.play();
 
             tableWord.classList.add('focus');
             item.parentNode.parentNode.classList.add('active');
-            audio.play();
-        } else {
-            tableWord.classList.remove('focus');
-            item.classList.remove('paused');
-            audio.pause();
+            item.classList.add('paused');
+
+            audio.addEventListener('ended', (e) => {
+                tableWord.classList.remove('focus');
+                item.classList.remove('paused');
+                item.parentNode.parentNode.classList.remove('active');
+            });
         }
-
-    } else {
-
-        audioLink.forEach(item => {
-            item.classList.remove('paused');
-            item.parentNode.parentNode.classList.remove('active');
-        });
-
-        audio.src = src;
-        audio.play();
-
-        tableWord.classList.add('focus');
-        item.parentNode.parentNode.classList.add('active');
-        item.classList.add('paused');
-
-        audio.addEventListener('ended', (e) => {
-            tableWord.classList.remove('focus');
-            item.classList.remove('paused');
-            item.parentNode.parentNode.classList.remove('active');
-        });
     }
-}
 
 
 }
@@ -1746,12 +1754,65 @@ function play(src, item) {
 audio();
 
 
+/*============== CHANGE BACKGROUND HEADER ==============*/
 
+function scrollHeader() {
+    const header = document.getElementById('header');
+    if (this.scrollY >= 100) {
+        header.classList.add('scroll-header');
+    } else {
+        header.classList.remove('scroll-header');
+    }
+}
+
+window.addEventListener('scroll', scrollHeader);
+
+
+// ******************* SHOW TRANSCRIPTION WORD *************************
+// function showTrans() {
+//     const btnShowTranscritpion = document.getElementById('nav-transcription'),
+//         tr = document.querySelectorAll('tr');
+
+//     btnShowTranscritpion.addEventListener('click', () => {
+//         tr.forEach(item => {
+//             if (item.className === 'hide') {
+//                 item.classList.add('show');
+//             } else {
+//                 item.classList.remove('show');
+//             }
+//         });
+//     });
+// }
+
+// showTrans();
+
+
+/*==================== DARK LIGHT THEME ====================*/
+
+const themeButtom = document.getElementById('theme-button'),
+      iconTheme = 'bxs-moon',
+      lightTheme = 'light-theme';
+
+themeButtom.addEventListener('click', () => {
+    document.body.classList.toggle('light-theme');
+    themeButtom.classList.toggle(iconTheme);
+    saveLocalStorageTheme();
+});
+
+function saveLocalStorageTheme() {
+    localStorage.setItem('selected-theme', 
+    document.body.classList.contains(lightTheme) ? true : false);
+}
+
+if (!localStorage.getItem('selected-theme')) {
+    document.body.classList.add('light-theme');
+    themeButtom.classList.add(iconTheme);
+}
 
 // function repeadListWord(ms) {
 //     // setTimeout(() => {play('audio/begin.mp3');}, 5000);
 //     setTimeout(() => {alert(ms);}, 5000);
-// }
+// }<i class='bx bxs-moon' ></i>
 
 
 
