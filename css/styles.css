@@ -303,6 +303,7 @@ tr:nth-child(4n) {
   .nav {
     display: flex;
     justify-content: space-between;
+    gap: 2rem;
   }
   .nav__range-wrapper {
     display: none;
@@ -319,7 +320,7 @@ tr:nth-child(4n) {
   }
   td, th {
     padding: 1rem 0;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     text-align: center;
   }
   .words {

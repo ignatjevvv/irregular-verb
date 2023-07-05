@@ -1652,6 +1652,8 @@ function printWordList() {
         </tr>
       `;
     });
+
+    console.log(table.length);
 }
 
 printWordList();
@@ -1661,11 +1663,19 @@ printWordList();
 const inputSearchWord = document.getElementById('word');
 
 
+
 // const regex = new RegExp('been');
 
 inputSearchWord.addEventListener('keyup', () => {
-    const regex = new RegExp(inputSearchWord.value.toLowerCase());
-    table.innerHTML = '';
+    const regex = new RegExp(inputSearchWord.value.toLowerCase()),
+          trContent = document.querySelectorAll('tr');
+
+    for (let i = 0; i < trContent.length; i++) {
+        if (i > 0) {
+            trContent[i].remove();
+        }
+    }
+
     wordList.forEach(word => {
         let arr = [word.v1, word.v2, word.v3];
         if (regex.test(arr.join())) {
@@ -1677,7 +1687,7 @@ inputSearchWord.addEventListener('keyup', () => {
                 <td>${word.v3}</td>
                 <td>${word.translate.split(0, 5)}</td>
             </tr>
-            <tr class="hide show">
+            <tr class="hide hide">
                 <td></td>
                 <td>${word.v4}</td>
                 <td>${word.v5}</td>
@@ -1706,8 +1716,8 @@ function audio() {
 
     audioLink.forEach(item => {
         item.addEventListener('click', e => {
-            play(item.attributes[0].nodeValue, item);
             totalLinkPlay = item.attributes[0].nodeValue;
+            play(item.attributes[0].nodeValue, item);
         });
     });
 
@@ -1790,8 +1800,8 @@ window.addEventListener('scroll', scrollHeader);
 /*==================== DARK LIGHT THEME ====================*/
 
 const themeButtom = document.getElementById('theme-button'),
-      iconTheme = 'bxs-moon',
-      lightTheme = 'light-theme';
+    iconTheme = 'bxs-moon',
+    lightTheme = 'light-theme';
 
 themeButtom.addEventListener('click', () => {
     document.body.classList.toggle('light-theme');
@@ -1800,8 +1810,8 @@ themeButtom.addEventListener('click', () => {
 });
 
 function saveLocalStorageTheme() {
-    localStorage.setItem('selected-theme', 
-    document.body.classList.contains(lightTheme) ? true : false);
+    localStorage.setItem('selected-theme',
+        document.body.classList.contains(lightTheme) ? true : false);
 }
 
 if (!localStorage.getItem('selected-theme')) {
