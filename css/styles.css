@@ -308,11 +308,11 @@ tr:nth-child(4n) {
   .nav__range-wrapper {
     display: none;
   }
-  .nav__input {
-    font-size: 1rem;
-  }
   .nav__logo {
     width: 2.7rem;
+  }
+  .nav__input {
+    font-size: 1rem;
   }
   .words__table {
     border-spacing: 0.1rem;
