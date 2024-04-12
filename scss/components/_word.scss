@@ -1,0 +1,38 @@
+.words {
+    font-size: 1.5rem;
+
+    &__table {
+        margin: 0 auto;
+        /* border: 1px solid rgb(0, 0, 0); */
+        color: var(--text-color);
+        border: none;
+        width: 100%;
+    }
+}
+
+tr.active {
+    color: var(--text-color);
+}
+
+td, th {
+    width: 50px;
+    padding: .5rem;
+    position: relative;
+}
+
+.focus {
+    color: var(--focus-color-table);
+}
+
+.hide {
+    display: none;
+    color: #676767;
+}
+
+.show {
+    display: contents;
+}
+
+tr:nth-child(4n) {
+    background: #8a2be230
+}
